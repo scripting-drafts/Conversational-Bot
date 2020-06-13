@@ -1,47 +1,60 @@
 import pandas as pd
 import csv
-import itertools
 from  graphviz import Digraph as d
 from sys import argv
-import itertools
 
 file = argv[1]
 df = pd.read_csv(file, delimiter='\t')
-subreddits = list(dict.fromkeys(df.loc[:, 'sub']))
 titles = list(dict.fromkeys(df.loc[:, 'title']))
 dots = (title for title in titles)
-childs_list = {}
 parents_list = []
 
-for parent in df['parent_id']:
-	parents_list.append(parent)
+for title, dot in zip(titles, dots):
+    sub = df.loc[df['title'] == title, 'sub'].iloc[0]
+    dot = d(comment=str(sub), engine='circo')
 
-parents = pd.Series(parents_list)
+    for row in range(df.loc[df['title'] == title].index[0], df.loc[df['title'] == title].index[-1]+1):
+        if df.loc[row, 'parent_id'] == 'root':
+            dot.node(str(df.loc[row,'id']), str(df.loc[row,'author']), shape='circle', fontname='helvetica')
+            try:
+                for children in df.loc[df['title'] == title, 'id']:
+                    dot.edges(str(df.loc[row, 'id']) + children)
+            except Exception as e:
+                pass
 
-for sub in subreddits:
+        parent_pids_chunk_list = []
+        parent_pids_list = []
+        children = 0
 
-	for title, dot in zip(titles, dots):
-		dot = d(comment=str(sub), engine='circo')
+        row_id = df.loc[row, 'id']
+        row_pid = df.loc[row, 'parent_id']
+        row_id_related = df['parent_id'].str.contains(row_id, case=True)
+        row_pid_related = df['id'].str.contains(row_pid, case=True)
+        c_ids = df.loc[row_id_related, 'id']
+        p_id = df.loc[row_pid_related, 'id']
+        p_pids = df.loc[row_pid_related, 'parent_id']
 
-		for row in range(df.loc[df['title'] == title].index[0], df.loc[df['title'] == title].index[-1]+1):
-			dot.node(str(df.loc[row,'id']), str(df.loc[row,'author']), shape='circle', fontname='helvetica')#, fixedsize='true', width='2', height='2')# + '\n' + str(df.loc[row, 'body']).replace('\s\s', '\n'))
-			child = df.loc[row, 'id']
+        for p_pid in p_pids:
+            parent_pids_chunk_list.append(p_pid)
+            p_pid_related = df['id'].str.contains(p_pid, case=True)
+            p2_pids = df.loc[p_pid_related, 'parent_id']
 
-			try:
-				related = parents.str.contains(child, case=True)
-			except Exception as e:
-				print(e)
-				pass
-			else:
-				true_parents = df.loc[related, 'id']
-				for parent in true_parents:
-					dot.edge(child, parent, constraint = 'true')
+            for p2_pid in p2_pids:
+                if p2_pid:
+                    parent_pids_chunk_list.append(p2_pid)
+                    p2_pid_related = df['id'].str.contains(p2_pid, case=True)
+                    p3_pids = df.loc[p_pid_related, 'parent_id']
+                    for p3_pid in p3_pids:
+                        if p3_pid:
+                            parent_pids_chunk_list.append(p3_pid)
 
-			if df.loc[row, 'parent_id'] == 'main_parent':
-				try:
-					for children in df.loc[df['title'] == title, 'id']:
-						dot.edge(str(df.loc[row, 'id']) + children)
-				except Exception as x:
-					print(x)
+        for i in range(0, len(parent_pids_chunk_list), 1):
+            parent_pids_list = parent_pids_chunk_list[i:i + 1]
 
-		dot.render('test-output/' + str(sub) + '-' + str(title).replace('/', ' ') + '.gv', view=True)
+        if 'root' in parent_pids_list:
+            dot.node(str(df.loc[row,'id']), str(df.loc[row,'author']), shape='circle', fontname='helvetica')
+
+        for c_id in c_ids:
+            dot.edge(df.loc[row, 'id'], c_id, constraint = 'true')
+
+    dot.render('test-output/' + str(sub) + '-' + str(title).replace('/', ' ') + '.gv', view=True)
