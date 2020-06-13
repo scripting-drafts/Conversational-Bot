@@ -57,7 +57,7 @@ for each_post in all_posts:
                 data['author']= str(submission.author)
                 data['body'] = multireplace(submission.selftext, replacements=replacements, ignore_case=True)#submission.selftext.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace(';', '')#''.join(body.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace('\"', ''))#.replace('&#x200B', '')#multireplace(submission.selftext, replacements=replacements, ignore_case=True)
                 data['score'] = submission.score
-                data['parent_id'] = 'main_parent'
+                data['parent_id'] = 'root'
 
                 commentlist.append(data)
                 submission.comments.replace_more(limit=None)
