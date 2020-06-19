@@ -1,4 +1,4 @@
-# Reddit-Data-Science
-Source of semantic trees for machine learning purposes
+# Reddit-Deep-Learning
+Source of semantic trees to input on a RNN
 
 Under construction
