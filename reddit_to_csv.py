@@ -52,7 +52,7 @@ for each_post in all_posts:
             if submission.is_self == True:
                 data = {}
                 data['sub'] = str(sub.subreddit.display_name)
-                data['title'] = submission.title
+                data['title'] = multireplace(submission.title, replacements=replacements, ignore_case=True)
                 data['id'] = submission.id
                 data['author']= str(submission.author)
                 data['body'] = multireplace(submission.selftext, replacements=replacements, ignore_case=True)#submission.selftext.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace(';', '')#''.join(body.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace('\"', ''))#.replace('&#x200B', '')#multireplace(submission.selftext, replacements=replacements, ignore_case=True)
@@ -66,7 +66,7 @@ for each_post in all_posts:
                     if comment.author != None:
                         data = {}
                         data['sub'] = str(sub.subreddit.display_name)
-                        data['title'] = sub.title
+                        data['title'] = multireplace(sub.title, replacements=replacements, ignore_case=True)
                         data['id'] = comment.id
                         data['author']= str(comment.author)
                         data['body'] = multireplace(comment.body, replacements=replacements, ignore_case=True)#comment.body.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace(';', '')#''.join(body.replace('\t', ' ').replace('\n', ' ').replace('&#x200B', '').replace('\"', ''))#.replace('&#x200B', '')#multireplace(comment.body, replacements=replacements, ignore_case=True)
