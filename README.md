@@ -1,4 +1,4 @@
 # Reddit-Deep-Learning
-Source of semantic trees to input on a RNN
+Source of semantic trees to input to a RNN
 
-Under construction
+Under development
