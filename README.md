@@ -1,4 +1,2 @@
 # Reddit-Deep-Learning
-Source of semantic trees
-
-Under development
+Reddit scraping with PRAW and visualization with Graphviz
