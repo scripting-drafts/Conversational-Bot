@@ -13,7 +13,7 @@ line 605 -> Number of the last iteration the Chatbot will listen to.*3
 
 
 *1 Or if the training is complete and you want to run the Chatbot.  
-*2 It is highly recommended to do the training on a GPU. With default values you can run it quickly on a modest one.
+*2 It is highly recommended to do the training on a GPU. With default values you can run it quickly on a modest one.  
 *3 Set to a previous than lastest iteration to check if the data got corrupted.
 
 To run the Chatbot uncomment the last lines of the code below # CHAT # and skip the training.
