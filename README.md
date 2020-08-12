@@ -1,2 +1,2 @@
 # Reddit-Deep-Learning
-Reddit scraping with PRAW and visualization with Graphviz.
+Reddit scraping with PRAW, visualization with Graphviz and training with pyTorch.
