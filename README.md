@@ -1,5 +1,5 @@
 # Reddit-Deep-Learning
-Run the scraper with reddit_to_csv.py, make pairs (pairs.txt) out of the csv file (reddit-fetch.csv) with extract-pairs.py and train your model with DL_Chatbot. For the sake of coherence in the conversations I recommend you run the srapper on a single subreddit.
+Run the scraper with reddit_to_csv.py, make pairs (pairs.txt) out of the csv file (reddit-fetch.csv) with extract-pairs.py and train your model with DL_Chatbot.py. For the sake of coherence in the conversations I recommend you run the srapper on a single subreddit.
 
 # Basic tuning for data modeling, RNN and the Chatbot.
 
