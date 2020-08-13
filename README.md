@@ -1,8 +1,10 @@
 # Reddit-Deep-Learning
-Run the scraper with reddit_to_csv.py, make pairs (pairs.txt) out of the csv file (reddit-fetch.csv) with extract-pairs.py and train your model with DL_Chatbot.py. For the sake of coherence in the conversations I recommend you run the scraper on a single subreddit.
+Run the scraper with reddit_to_csv.py, make pairs (pairs.txt) out of the csv file (reddit-fetch.csv) with extract-pairs.py and train your model with DL_Chatbot.py. For the sake of coherence in the conversations I recommend you to run the scraper on a single subreddit.
 
-# Basic tuning for data modeling, RNN and the Chatbot.
+# Basic tuning for data modeling and training
 
+line 84 -> Maximum number of words for a sentence to be included in the pairs list.  
+line 143 -> Minimum repetition frequency for each word to be considered when populating the vocabulary.  
 line 561 -> Comment if the training has to start from a checkpoint.*1  
 line 562 -> Checkpoint from which the training has to continue.  
 line 563 - 565 -> Uncomment if the training has to start from a checkpoint.*1  
