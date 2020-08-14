@@ -1,3 +1,5 @@
+This project is based on the pyTorch Chatbot by Matthew Inkawhich  
+
 # General Usage 
 
 Run the scraper with reddit_to_csv.py, make pairs (pairs.txt) out of the csv file (reddit-fetch.csv) with extract-pairs.py and train your model with DL_Chatbot.py. For the sake of coherence in the conversations I recommend running the scraper on a single subreddit.
@@ -20,7 +22,3 @@ line 605 -> Number of the last iteration the Chatbot will listen to.*3
 *3 Set to a previous than lastest iteration to check if the data got corrupted.
 
 To run the Chatbot uncomment the last lines of the code below # CHAT # and skip the training.
-  
-  
-
-This project is based on the pyTorch Chatbot by Matthew Inkawhich
